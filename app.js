@@ -25,7 +25,7 @@ app.get('/:id', (req, res, next)=>{
     let id = req.params.id
     let idData = data.data.filter(item => item['ID'] == id)
     if (idData.length == 0){
-        next({'status':500, 'error': "No matching ID"})
+        next({'status':500, 'error': { "message": "No matching ID"}})
     } else {
         res.send(idData)
     }
@@ -34,7 +34,7 @@ app.use((err, req, res, next)=> {
     res.status(err.status).send({'error': err.error})
 })
 app.use((req, res)=>{
-    res.status(404).send({'error': "Nothing here."})
+    res.status(404).send({'error': {"message": "Nothing here."}})
 })
 
 const listener = ()=> console.log(`We are serving up data on port: ${port}`)
